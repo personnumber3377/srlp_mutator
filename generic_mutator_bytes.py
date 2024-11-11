@@ -1,6 +1,7 @@
 
 import random
 import string as string_mod # string.printable
+import dosstuff
 
 MAX_REPEAT_COUNT = 5
 
@@ -31,7 +32,7 @@ def add_character(string: bytes) -> str:
 
 def mutate_generic(string: bytes) -> str: # Mutate a string.
 
-	strat = random.randrange(3)
+	strat = random.randrange(4)
 
 	match strat:
 		case 0:
@@ -43,6 +44,8 @@ def mutate_generic(string: bytes) -> str: # Mutate a string.
 		case 2:
 			# Add a character somewhere
 			return add_character(string)
+		case 3:
+			return dosstuff.mutate(string)
 		case _:
 			print("Invalid")
 			assert False
