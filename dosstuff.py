@@ -176,7 +176,9 @@ def mutate(data: bytes): # Main mutator entry point. Returns a mutated version o
 	if c(NEW_DATA_CHANCE): # Create new string.
 		return generate_new()
 	else: # Mutate existing.
-		return mutate_existing(data)
+		new_dat = mutate_existing(data)
+		print("len(new_dat) == "+str(len(new_dat)))
+		return new_dat
 
 def fuzz(buf, add_buf, max_size): # For AFL and AFL++
 

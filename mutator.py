@@ -58,17 +58,17 @@ def fuzz(buf, add_buf, max_size):
 	buf = bytes(buf)
 	#print("mutatinggggg")
 
-	fh = open("paska.bin", "wb")
-	fh.write(buf)
-	fh.close()
+	#fh = open("paska.bin", "wb")
+	#fh.write(buf)
+	#fh.close()
 	
 	try:
 		#print("fffffffffffffffffffffffffffff!!!!")
 		thing = rlp.decode(buf)
 
-		fh = open("shitfuck.bin", "wb")
-		fh.write(b"somebullshitheremaybefefefefefefefefefefefefefefefefe")
-		fh.close()
+		#fh = open("shitfuck.bin", "wb")
+		#fh.write(b"somebullshitheremaybefefefefefefefefefefefefefefefefe")
+		#fh.close()
 	
 		#print("decded!!!!")
 		#assert False
@@ -88,7 +88,7 @@ def fuzz(buf, add_buf, max_size):
 			#print("Invalid type!!!")
 			assert False
 	except Exception as e: # Invalid data. Just return original buffer.
-		print("Encountered exception: "+str(e))
+		#print("Encountered exception: "+str(e))
 		return bytearray(buf)
 
 	#return mutated_out
