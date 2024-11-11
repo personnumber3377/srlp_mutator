@@ -32,7 +32,7 @@ def add_character(string: bytes) -> str:
 
 def mutate_generic(string: bytes) -> str: # Mutate a string.
 
-	strat = random.randrange(4)
+	strat = random.randrange(3)
 
 	match strat:
 		case 0:

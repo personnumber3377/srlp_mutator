@@ -3,7 +3,7 @@ import rlp
 from generic_mutator_bytes import *
 import random
 import copy
-
+import dosstuff
 
 MAX_ADD_COUNT = 5 # Add a maximum of five copies of a list thing..
 
@@ -43,19 +43,31 @@ def mutate_list(some_bullshit):
 		rand_index = random.randrange(len(some_bullshit))
 		if isinstance(some_bullshit[rand_index], list):
 			mutate_list(some_bullshit[rand_index]) # Recursively.
-			return
+			return some_bullshit
 		elif isinstance(some_bullshit[rand_index], bytes) or isinstance(some_bullshit[rand_index], bytearray):
 			# Now just use generic mutator.
 			some_bullshit[rand_index] = mutate_generic(some_bullshit[rand_index])
-			return
+			return some_bullshit
 		else:
 			print("poopoof"*1000)
 			assert False
+	elif strat == 3:
+		# Just copy a random element a bunch of times...
+		rand_element = random.choice(some_bullshit)
+		rand_element = copy.deepcopy(rand_element)
+
+		for _ in range(random.randrange(1,100000)):
+			some_bullshit.insert(random.randrange(len(some_bullshit)), rand_element)
+		return some_bullshit
+
 	print("Fuck!!!"*10000)
 	assert False
 
 def fuzz(buf, add_buf, max_size):
 	buf = bytes(buf)
+
+	#if random.randrange(10) == 1:
+	#	return bytearray(dosstuff.mutate(bytes(buf))[:max_size])[:max_size]
 	#print("mutatinggggg")
 
 	#fh = open("paska.bin", "wb")
@@ -77,12 +89,14 @@ def fuzz(buf, add_buf, max_size):
 			#print("fuukccc"*1000)
 			resthing = bytearray(rlp.encode(mutate_generic(thing)))[:max_size]
 			#print("resthing == "+str(resthing))
+			#print("Returning input with length: "+str(len(resthing)))
 			return resthing
 		elif isinstance(thing, list):
 			# 
 			#print("poooopooooooo")
 			resthing = bytearray(rlp.encode(mutate_list(thing)))[:max_size]
 			#print("resthing == "+str(resthing))
+			#print("Returning input with length: "+str(len(resthing)))
 			return resthing
 		else:
 			#print("Invalid type!!!")

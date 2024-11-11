@@ -3,7 +3,7 @@ import random
 import string
 import math
 
-MAXIMUM_LENGTH = 100_000 # Absolute maximum length of the generated data.
+MAXIMUM_LENGTH = 1_000_000 # Absolute maximum length of the generated data.
 
 ALLOWED_CHARS = string.printable # All allowed characters.
 
@@ -13,15 +13,15 @@ PUNCTUATION_CHANCE = 0.9
 
 NEW_DATA_CHANCE = 0.01 # Possibility of creating an entirely new string.
 
-MAX_REPEAT_COUNT = 100_00 # Maximum amount of repetitions
+MAX_REPEAT_COUNT = 200_00 # Maximum amount of repetitions
 
-MAX_REPEAT_LENGTH = 10000 # Maximum length of the repeating stuff
+MAX_REPEAT_LENGTH = 300000 # Maximum length of the repeating stuff
 
-MAX_REPEAT_COUNT_LINEAR = 1000
+MAX_REPEAT_COUNT_LINEAR = 5000
 
 MIN_REPEAT_COUNT_LINEAR = 200
 
-MAX_REPEAT_TOKEN_LENGTH = 5 # Maximum length of the string which to repeat.
+MAX_REPEAT_TOKEN_LENGTH = 200 # Maximum length of the string which to repeat.
 
 MAX_REPEAT_STRING_COUNT = 10 # Maximum amount of repeated strings, for example if we have three of these then this will generate a string like "ababababccccccccccccccqwertyqwertyqwerty" (three repeating substrings)
 
@@ -177,7 +177,7 @@ def mutate(data: bytes): # Main mutator entry point. Returns a mutated version o
 		return generate_new()
 	else: # Mutate existing.
 		new_dat = mutate_existing(data)
-		print("len(new_dat) == "+str(len(new_dat)))
+		#print("len(new_dat) == "+str(len(new_dat)))
 		return new_dat
 
 def fuzz(buf, add_buf, max_size): # For AFL and AFL++
